@@ -1,9 +1,9 @@
 import Phaser from "phaser";
 import { PreloadScene } from "@/scenes/PreloadScene";
 import { TitleScene } from "@/scenes/TitleScene";
-import { BubbleScene } from "@/scenes/BubbleScene";
 import { MusicScene } from "@/scenes/MusicScene";
-import OutlinePipelinePlugin from "phaser3-rex-plugins/plugins/outlinepipeline-plugin.js";
+import { BubbleScene } from "@/scenes/BubbleScene";
+import { PhysicsScene } from "@/scenes/PhysicsScene";
 
 export async function Game() {
 	const config: Phaser.Types.Core.GameConfig = {
@@ -15,17 +15,15 @@ export async function Game() {
 		scale: {
 			mode: Phaser.Scale.FIT,
 		},
-		scene: [PreloadScene, TitleScene, BubbleScene, MusicScene],
-
-		plugins: {
-			global: [
-				{
-					key: "rexOutlinePipeline",
-					plugin: OutlinePipelinePlugin,
-					start: true,
-				},
-			],
+		physics: {
+			default: "matter",
+			matter: {
+				gravity: { x: 0, y: -0.5 },
+				// gravity: { x: 0, y: 0 },
+				debug: true,
+			},
 		},
+		scene: [PreloadScene, TitleScene, MusicScene, BubbleScene, PhysicsScene],
 	};
 
 	const game = new Phaser.Game(config);
