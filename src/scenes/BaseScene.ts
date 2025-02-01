@@ -19,6 +19,25 @@ export class BaseScene extends Phaser.Scene {
 		this.flashRect = null;
 	}
 
+	create() {
+		this.cameras.main.setBackgroundColor(0xffffff);
+		this.fade(false, 200, 0x000000);
+
+		this.addText({
+			text: "Use keyboard:\n1) MusicScene\n2) BubbleScene",
+			color: "black",
+			size: 32,
+		});
+		if (this.input.keyboard) {
+			this.input.keyboard.on("keydown-ONE", () => {
+				this.scene.start("MusicScene");
+			});
+			this.input.keyboard.on("keydown-TWO", () => {
+				this.scene.start("BubbleScene");
+			});
+		}
+	}
+
 	// Start a camera fade effect to a specific color
 	fade(fadeOut: boolean, time: number, hexColor: number) {
 		let c = Phaser.Display.Color.ColorToRGBA(hexColor);

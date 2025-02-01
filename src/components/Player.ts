@@ -1,4 +1,4 @@
-import { GameScene } from "@/scenes/GameScene";
+import { BaseScene } from "@/scenes/BaseScene";
 
 const ACCELERATION = 150;
 const MAX_SPEED = 400;
@@ -10,7 +10,7 @@ console.assert(
 );
 
 export class Player extends Phaser.GameObjects.Container {
-	public scene: GameScene;
+	public scene: BaseScene;
 
 	// Sprites
 	private spriteSize: number;
@@ -27,7 +27,7 @@ export class Player extends Phaser.GameObjects.Container {
 	public velocity: Phaser.Math.Vector2;
 	private border: { [key: string]: number };
 
-	constructor(scene: GameScene, x: number, y: number) {
+	constructor(scene: BaseScene, x: number, y: number) {
 		super(scene, x, y);
 		scene.add.existing(this);
 		this.scene = scene;
@@ -168,10 +168,7 @@ export class Player extends Phaser.GameObjects.Container {
 	}
 
 	touchInsideBody(x: number, y: number) {
-		return (
-			Phaser.Math.Distance.Between(this.x, this.y, x, y) <
-			this.spriteSize
-		);
+		return Phaser.Math.Distance.Between(this.x, this.y, x, y) < this.spriteSize;
 	}
 
 	doABarrelRoll() {
