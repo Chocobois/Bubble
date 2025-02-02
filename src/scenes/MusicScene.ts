@@ -14,7 +14,7 @@ export class MusicScene extends BaseScene {
 	public blist: Bauble[];
 	public eList: BasicEffect[];
 	public script: Beatmap;
-	public ttimer: number = 3000;
+	public ttimer: number = 0;
 	public initTest: boolean = false;
 
 	private mtext: Phaser.GameObjects.Text;
@@ -22,6 +22,10 @@ export class MusicScene extends BaseScene {
 	private layer1: Phaser.GameObjects.Container;
 	private layer2: Phaser.GameObjects.Container;
 	private layer3: Phaser.GameObjects.Container;
+
+	private t1: number = 1000;
+	private t2: number = 0;
+	private t3: number = 0;
 
 	public stageMusic: Music;
 	constructor() {
@@ -39,12 +43,13 @@ export class MusicScene extends BaseScene {
 		this.stageMusic = new Music(this,"m_test");
 		this.stageMusic.setVolume(1);
 		this.mtext = this.addText({
-			x: 1460,
-			y: 940,
-			size: 70,
+			x: 960,
+			y: 540,
+			size: 360,
 			color: "black",
-			text: "",
+			text: "3",
 		});
+		this.mtext.setOrigin(0.5,0.5);
 		this.layer1 = new Phaser.GameObjects.Container(this,0,0);
 		this.layer2 = new Phaser.GameObjects.Container(this,0,0);
 		this.layer3 = new Phaser.GameObjects.Container(this,0,0);
@@ -62,15 +67,50 @@ export class MusicScene extends BaseScene {
 	}
 
 	update(time: number, delta: number) {
-		this.mtext.setText("");
-		if(this.ttimer > 0) {
-			if(!this.initTest){
-				this.ttimer -= delta;
-				if(this.ttimer <= 0) {
+		if(this.t1 > 0) {
+			this.t1 -= delta;
+			if(this.t1 <= 0){
+				this.t2 = 1000;
+				this.mtext.setText("2");
+				this.mtext.setAlpha(1);
+			} else {
+				this.mtext.setAlpha(this.t1/1000);
+			}
+		}
+		if(this.t2 > 0) {
+			this.t2 -= delta;
+			if(this.t2 <= 0){
+				this.t3 = 1000;
+				this.mtext.setText("1");
+				this.mtext.setAlpha(1);
+			} else {
+				this.mtext.setAlpha(this.t2/1000);
+			}
+		}
+		if(this.t3 > 0) {
+			this.t3 -= delta;
+			if(this.t3 <= 0){
+				this.t3 = 0;
+				this.ttimer=1000;
+				this.mtext.setText("GO!");
+				this.mtext.setAlpha(1);
+				if(!this.initTest){
 					this.stageMusic.play();
 					this.script.start();
 					this.initTest = true;
 				}
+			} else {
+				this.mtext.setAlpha(this.t3/1000);
+			}
+		}
+		if(this.ttimer > 0) {
+			this.ttimer -= delta;
+			if(this.ttimer <= 0){
+				this.ttimer = 0;
+				this.mtext.setText("");
+				this.mtext.setAlpha(1);
+			} else {
+				this.mtext.setAlpha(this.ttimer/1000);
 			}
 		}
 
