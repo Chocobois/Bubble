@@ -211,7 +211,7 @@ export class Bauble extends Collidable{
                 this.scene.addEffect(new TextEffect(this.scene,this.x,this.y,"COOL!","cyan",80,true,"fuchsia",1000,100,1));
                 break;
             } case 2: {
-                this.scene.addEffect(new TextEffect(this.scene,this.x,this.y,"YIFF!","yellow",80,true,"fuchsia",1000,100,1));
+                this.scene.addEffect(new TextEffect(this.scene,this.x,this.y,"JAMMIN!","yellow",80,true,"fuchsia",1000,100,1));
                 break;
             } default: {
                 break;
