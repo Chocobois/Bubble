@@ -220,6 +220,24 @@ export class Bauble extends Collidable{
 
     }
 
+    randomFailText(){
+        switch(Math.trunc(Math.random()*3)){
+            case 0: {
+                this.scene.addEffect(new TextEffect(this.scene,this.x,this.y,"Fail","red",50,true,"maroon",1000,200,-1.5));
+                break;
+            } case 1: {
+                this.scene.addEffect(new TextEffect(this.scene,this.x,this.y,"Suck","red",50,true,"maroon",1000,200,-1.5));
+                break;
+            } case 2: {
+                this.scene.addEffect(new TextEffect(this.scene,this.x,this.y,"RIP","red",50,true,"maroon",1000,200,-1.5));
+                break;
+            } default: {
+                break;
+            }
+        }
+
+    }
+
     play(){
         if(this.clicked){
             //this.scene.sound.play(this.note,{volume: 0.5});
@@ -227,8 +245,9 @@ export class Bauble extends Collidable{
         } else {
             //this.scene.sound.play(this.note,{volume: 0.5});
             //this.scene.sound.play("fail",{volume: 0.5});
-            this.scene.setVolume(0.5);
+            this.scene.setVolume(0.95);
             this.randomFailSound();
+            this.randomFailText();
         }
         this.deleteFlag = true;
 
