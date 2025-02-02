@@ -118,8 +118,8 @@ export class Beatmap {
 
         {key: "bubble", spawn: 32.5, spr: "bbl", ac:36.5, end:38.5, note:"t_F", v: [70, Phaser.Math.DegToRad(-135)], xy:[790,370], collide:[0,1], txt: "1"},
         {key: "bubble", spawn: 32.5, spr: "bbl", ac:38, end:40, note:"t_F", v: [70, Phaser.Math.DegToRad(-45)], xy:[1130,370], collide:[0,1], txt: "2"},
-        {key: "bubble", spawn: 32.5, spr: "bbl", ac:49, end:41, note:"t_F", v: [0, Phaser.Math.DegToRad(0)], xy:[960,540], collide:[0,1], txt: "3"},
-        {key: "bubble", spawn: 32.5, spr: "bbl", ac:49.5, end:41.5, note:"t_F", v: [70, Phaser.Math.DegToRad(45)], xy:[1130,710], collide:[0,1], txt: "4"},
+        {key: "bubble", spawn: 32.5, spr: "bbl", ac:39, end:41, note:"t_F", v: [0, Phaser.Math.DegToRad(0)], xy:[960,540], collide:[0,1], txt: "3"},
+        {key: "bubble", spawn: 32.5, spr: "bbl", ac:39.5, end:41.5, note:"t_F", v: [70, Phaser.Math.DegToRad(45)], xy:[1130,710], collide:[0,1], txt: "4"},
         {key: "bubble", spawn: 32.5, spr: "bbl", ac:41, end:43, note:"t_F", v: [70, Phaser.Math.DegToRad(135)], xy:[790,710], collide:[0,1], txt: "5"},
 
         {key: "bubble", spawn: 41.125, spr: "bbl", ac:43, end:45, note:"t_F", v: [0, Phaser.Math.DegToRad(0)], xy:[960,540], collide:[0,1], txt: "1"},
