@@ -8,6 +8,7 @@ import { BasicEffect } from "@/components/RhythmGame/BasicEffect";
 
 export class MusicScene extends BaseScene {
 	private background: Phaser.GameObjects.Image;
+	private background2: Phaser.GameObjects.Image;
 	private music: Music;
 
 	public curBeat: number;
@@ -19,6 +20,7 @@ export class MusicScene extends BaseScene {
 
 	private mtext: Phaser.GameObjects.Text;
 
+
 	private layer1: Phaser.GameObjects.Container;
 	private layer2: Phaser.GameObjects.Container;
 	private layer3: Phaser.GameObjects.Container;
@@ -26,6 +28,10 @@ export class MusicScene extends BaseScene {
 	private t1: number = 1000;
 	private t2: number = 0;
 	private t3: number = 0;
+
+	private aphAdj: number = 0;
+	private cfade: number = 0; //max 3000
+	private fadeOn: boolean = false;
 
 	public stageMusic: Music;
 	constructor() {
@@ -40,6 +46,10 @@ export class MusicScene extends BaseScene {
 		this.background = new Phaser.GameObjects.Image(this,0,0,"t_bkg");
 		this.background.setOrigin(0,0);
 		this.add.existing(this.background);
+		this.background2 = new Phaser.GameObjects.Image(this,0,0,"t_bkg_p");
+		this.background2.setAlpha(0);
+		this.background2.setOrigin(0,0);
+		this.add.existing(this.background2);
 		this.stageMusic = new Music(this,"matojam");
 		this.stageMusic.setVolume(1);
 		this.mtext = this.addText({
@@ -67,6 +77,34 @@ export class MusicScene extends BaseScene {
 	}
 
 	update(time: number, delta: number) {
+		this.updateStartTimers(time, delta);
+		this.updateBkg(time,delta);
+
+
+		this.script.update(time,delta,this.stageMusic.getBarTime());
+		this.updateBubbles(time,delta,this.stageMusic.getBarTime());
+		this.updateEffects(time,delta);
+	}
+
+	updateBkg(time:number, delta:number){
+		if(this.cfade > 0) {
+			this.cfade -= delta;
+			if(this.cfade <= 0) {
+				this.cfade = 0;
+				if(!this.fadeOn) {
+					this.fadeOn = true;
+					this.aphAdj = 0.65;
+				}
+			} else {
+				this.aphAdj = (1-(this.cfade/3000))*0.65;
+			}
+		}
+
+		this.background2.setAlpha(this.aphAdj*((Math.sin(time/240)+1)/2));
+	}
+
+
+	updateStartTimers(time: number, delta: number){
 		if(this.t1 > 0) {
 			this.t1 -= delta;
 			if(this.t1 <= 0){
@@ -113,10 +151,6 @@ export class MusicScene extends BaseScene {
 				this.mtext.setAlpha(this.ttimer/1000);
 			}
 		}
-
-		this.script.update(time,delta,this.stageMusic.getBarTime());
-		this.updateBubbles(time,delta,this.stageMusic.getBarTime());
-		this.updateEffects(time,delta);
 	}
 
 	updateBubbles(t: number, d: number, beat: number){
@@ -152,6 +186,10 @@ export class MusicScene extends BaseScene {
 	addBubble(b: Bauble){
 		this.layer2.add(b);
 		this.blist.push(b);
+	}
+
+	crossFade(){
+		this.cfade = 3000;
 	}
 
 	addProp(e: BasicEffect){

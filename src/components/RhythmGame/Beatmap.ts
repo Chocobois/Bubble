@@ -178,6 +178,10 @@ export class Beatmap {
         {key: "bubble", spawn: 58.8, spr: "bbl", ac:79.75, end:80.75, note:"t_F", v: [0, Phaser.Math.DegToRad(-90)], xy:[480,900], collide:[1,2]},
         {key: "bubble", spawn: 58.85, spr: "bbl", ac:80, end:81, note:"t_F", v: [0, Phaser.Math.DegToRad(-90)], xy:[240,900], collide:[1,2]},
 
+
+        {key: "fade", spawn: 63, spr: "bbl", ac:80, end:81, note:"t_F", v: [0, Phaser.Math.DegToRad(-90)], xy:[240,900], collide:[1,2]},
+
+        
         {key: "bubble", spawn: 76.5, spr: "bbl", ac:80.5, end:81.5, note:"t_F", v: [50, Phaser.Math.DegToRad(-135)], xy:[1680,900], collide:[0,3]},
         {key: "bubble", spawn: 76.5, spr: "bbl", ac:81, end:82, note:"t_F", v: [50, Phaser.Math.DegToRad(-135)], xy:[1440,660], collide:[0,3]},
         {key: "bubble", spawn: 76.5, spr: "bbl", ac:81.25, end:82.25, note:"t_F", v: [50, Phaser.Math.DegToRad(-135)], xy:[1680,420], collide:[0,3]},
@@ -321,7 +325,7 @@ export class Beatmap {
         {key: "bubble", spawn: 158, spr: "bbl", ac:162.75, end:163.75, note:"t_F", v: [0, Phaser.Math.DegToRad(-135)], xy:[1200,900], collide:[0,3]},
 
     ];
-    
+
     constructor(scene: MusicScene){
         this.curIndex = 0;
         this.scene=scene;
@@ -359,8 +363,12 @@ export class Beatmap {
                 this.scene.addProp(new FadingProp(this.scene, this.data[n].xy[0], this.data[n].xy[1], this.data[n].spr, this.data[n].v, this.data[n].ac, this.data[n].end));
                 break;
             } case "fallprop":{
-                this.scene.addProp(new FallingProp(this.scene, this.data[n].xy[0], this.data[n].xy[1], this.data[n].spr, this.data[n].v, this.data[n].ac))
-            } default: {
+                this.scene.addProp(new FallingProp(this.scene, this.data[n].xy[0], this.data[n].xy[1], this.data[n].spr, this.data[n].v, this.data[n].ac));
+                break;
+            } case "fade": {
+                this.scene.crossFade();
+                break;
+            }   default: {
                 break;
             }
         }

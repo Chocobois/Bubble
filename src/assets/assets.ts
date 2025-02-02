@@ -6,6 +6,7 @@ const images: Image[] = [
 	// Backgrounds
 	image("backgrounds/background", "background"),
 	image("backgrounds/t_bkg", "t_bkg"),
+	image("backgrounds/t_bkg_p", "t_bkg_p"),
 	// Characters
 	image("characters/player", "player"),
 	image("characters/mandala_french", "mandala_french"),
