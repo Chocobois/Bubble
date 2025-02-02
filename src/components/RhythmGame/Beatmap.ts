@@ -335,6 +335,7 @@ export class Beatmap {
     }
 
     start(){
+        this.curIndex = 0;
         this.playing = true;
     }
 
