@@ -20,6 +20,7 @@ const images: Image[] = [
 	image("items/futbol", "futbol"),
 	// UI
 	image("ui/hud", "hud"),
+	image("ui/UI_score", "UI_score"),
 
 	// Titlescreen
 	image("titlescreen/sky", "title_sky"),
@@ -52,6 +53,8 @@ const audios: Audio[] = [
 	sound("t_F", "t_F", 0.5),
 	sound("t_F2", "t_F2", 0.5),
 	sound("t_G", "t_G", 0.5),
+
+	sound("pop", "pop", 0.5),
 
 	sound("fail0", "fail0", 0.35),
 	sound("fail1", "fail1", 0.35),

@@ -19,21 +19,21 @@ export class Bauble extends Collidable{
     private spr: Phaser.GameObjects.Sprite;
     private disp: Phaser.GameObjects.Graphics;
     //radius of circle effect
-    private rd: number = 300;
+    private rd: number = 194;
 
     private spawnCheck: number[] = [0,0,0,0]; //-x,+x,-y,+y
     private clearedSpawn: boolean = false;
     private cleared: boolean = false;
 
-    private bpm: number = 206;
+    private bpm: number = 120;
     private atimer: number = 0;
     private mtimer: number = 0;
     private activated: boolean = false;
+    private circling: boolean = false;
 
+    private myText: Phaser.GameObjects.Text;
 
-
-
-    constructor(scene:MusicScene, x: number, y: number, act: number, end: number, note: string, spr:string, v: number[], collide: number[]){
+    constructor(scene:MusicScene, x: number, y: number, act: number, end: number, note: string, spr:string, v: number[], collide: number[], txt: string = ""){
         super(scene, x, y);
         this.scene=scene;
         this.disp=this.scene.add.graphics();
@@ -52,10 +52,21 @@ export class Bauble extends Collidable{
         this.atimer = -1;
         this.mtimer = (this.endBeat-this.activeBeat)*(60000/this.bpm);
         this.spr.setOrigin(0.5,0.5);
-        this.spr.setAlpha(0.1);
+        this.spr.setAlpha(0);
         this.add(this.spr);
         this.add(this.disp);
 
+        this.myText = this.scene.addText({
+			x: 0,
+			y: 0,
+			size: 60,
+			color: "white",
+			text: txt,
+		});
+
+        this.myText.setOrigin(0.5,0.5);
+        this.add(this.myText)
+        this.myText.setAlpha(0);
 
         if(this.x <= 0) {
             this.spawnCheck[0] = 1;
@@ -95,12 +106,18 @@ export class Bauble extends Collidable{
         this.y += this.vy*(d/1000);
 
         if(beat >= this.activeBeat){
-            if(!this.activated) {
+            if(!this.circling) {
                 this.atimer = this.mtimer;
-                this.spr.setAlpha(1);
-                this.activated = true;
-                this.spr.setFrame(2);
-                this.bindInteractive(this.spr);
+                this.circling = true;
+            }
+            if(beat >= (this.activeBeat+1)){
+                if(!this.activated){
+                    this.spr.setAlpha(1);
+                    this.myText.setAlpha(1);
+                    this.spr.setFrame(2);
+                    this.bindInteractive(this.spr);
+                    this.activated = true;
+                }
             }
             if(this.atimer >= 0){
                 this.atimer -= d;
@@ -114,6 +131,7 @@ export class Bauble extends Collidable{
             
         } else if (this.activeBeat-beat <= 2) {
             this.spr.setAlpha(0.35+(0.8*(1-((this.activeBeat-beat)/2))));
+            this.myText.setAlpha(0.35+(0.8*(1-((this.activeBeat-beat)/2))));
         }
 
         this.boundCheck();
@@ -242,6 +260,8 @@ export class Bauble extends Collidable{
         if(this.clicked){
             //this.scene.sound.play(this.note,{volume: 0.5});
             this.scene.setVolume(1);
+            this.scene.sound.play("pop", {volume: 0.65});
+            this.scene.score += 10;
         } else {
             //this.scene.sound.play(this.note,{volume: 0.5});
             //this.scene.sound.play("fail",{volume: 0.5});

@@ -39,10 +39,16 @@ export class MusicScene extends BaseScene {
 	private mBeat: number = 161;
 	private squeaking: boolean = false;
 
+	private scoreUI: Phaser.GameObjects.Image;
+
+	public scoreText: Phaser.GameObjects.Text;
+	public score: number = 0;
+
 	public stageMusic: Music;
 	constructor() {
 		super({ key: "MusicScene" });
 	}
+
 
 	create(): void {
 		super.create();
@@ -58,6 +64,8 @@ export class MusicScene extends BaseScene {
 		this.add.existing(this.background2);
 		this.stageMusic = new Music(this,"matojam");
 		this.stageMusic.setVolume(1);
+
+
 		this.mtext = this.addText({
 			x: 960,
 			y: 540,
@@ -72,10 +80,23 @@ export class MusicScene extends BaseScene {
 		this.add.existing(this.layer1);
 		this.add.existing(this.layer2);
 		this.add.existing(this.layer3);
+		this.scoreUI = new Phaser.GameObjects.Image(this,1340,910,"UI_score");
+		this.add.existing(this.scoreUI);
+		this.scoreUI.setOrigin(0.125,0.5);
+		this.scoreUI.setDepth(11);
 
+		this.scoreText = this.addText({
+			x: 1340,
+			y: 910,
+			size: 50,
+			color: "black",
+			text: "Score: ",
+		});
+		this.scoreText.setOrigin(0,0.5);
+		this.scoreText.setDepth(12);
 		this.layer1.setDepth(10);
-		this.layer1.setDepth(20);
-		this.layer1.setDepth(30);
+		this.layer2.setDepth(20);
+		this.layer3.setDepth(30);
 
 		// this.background = this.add.image(0, 0, "background");
 		// this.background.setOrigin(0);
@@ -104,6 +125,7 @@ export class MusicScene extends BaseScene {
 		this.updateStartTimers(time, delta);
 		this.updateBkg(time,delta);
 		this.updateSqueaker(this.stageMusic.getBarTime());
+		this.scoreText.setText("Score: " + this.score);
 
 		this.script.update(time,delta,this.stageMusic.getBarTime());
 		this.updateBubbles(time,delta,this.stageMusic.getBarTime());
@@ -124,7 +146,7 @@ export class MusicScene extends BaseScene {
 			}
 		}
 
-		this.background2.setAlpha(this.aphAdj*((Math.sin(time/240)+1)/2));
+		this.background2.setAlpha(this.aphAdj*((Math.sin(time/500)+1)/2));
 	}
 
 
