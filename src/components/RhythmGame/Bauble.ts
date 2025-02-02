@@ -97,6 +97,8 @@ export class Bauble extends Collidable{
         this.clicked = true;
         this.spr.setFrame(2);
         this.spr.setAlpha(0);
+        this.disp.setVisible(false);
+        this.myText.setVisible(false);
         this.randomTextEffect();
         this.spr.removeInteractive();
     }
@@ -261,7 +263,7 @@ export class Bauble extends Collidable{
             //this.scene.sound.play(this.note,{volume: 0.5});
             this.scene.setVolume(1);
             this.scene.sound.play("pop", {volume: 0.65});
-            this.scene.score += 10;
+            this.scene.score += 100;
         } else {
             //this.scene.sound.play(this.note,{volume: 0.5});
             //this.scene.sound.play("fail",{volume: 0.5});
