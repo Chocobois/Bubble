@@ -24,16 +24,19 @@ export class BaseScene extends Phaser.Scene {
 		this.fade(false, 200, 0x000000);
 
 		this.addText({
-			text: "Use keyboard:\n1) MusicScene\n2) BubbleScene",
+			text: "Use keyboard:\n1) MusicScene\n2) BubbleScene\n3) PhysicsScene",
 			color: "black",
 			size: 32,
-		});
+		}); //.setStroke("white", 4);
 		if (this.input.keyboard) {
 			this.input.keyboard.on("keydown-ONE", () => {
 				this.scene.start("MusicScene");
 			});
 			this.input.keyboard.on("keydown-TWO", () => {
 				this.scene.start("BubbleScene");
+			});
+			this.input.keyboard.on("keydown-THREE", () => {
+				this.scene.start("PhysicsScene");
 			});
 		}
 	}
