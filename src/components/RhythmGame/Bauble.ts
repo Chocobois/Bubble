@@ -31,13 +31,17 @@ export class Bauble extends Collidable{
     private activated: boolean = false;
 
 
-    constructor(scene:MusicScene, x: number, y: number, act: number, end: number, note: string, spr:string, v: number[]){
+
+
+    constructor(scene:MusicScene, x: number, y: number, act: number, end: number, note: string, spr:string, v: number[], collide: number[]){
         super(scene, x, y);
         this.scene=scene;
         this.disp=this.scene.add.graphics();
         this.activeBeat=act;
         this.endBeat=end;
         this.note=note;
+        this.coll=collide;
+
         this.rad = 110;
         this.v = v;
         this.vx = this.v[0]*Math.cos(this.v[1]);
@@ -51,6 +55,7 @@ export class Bauble extends Collidable{
         this.spr.setAlpha(0.1);
         this.add(this.spr);
         this.add(this.disp);
+
 
         if(this.x <= 0) {
             this.spawnCheck[0] = 1;
@@ -80,7 +85,8 @@ export class Bauble extends Collidable{
         super.onDown(pointer,localX,localY,event);
         this.clicked = true;
         this.spr.setFrame(2);
-        this.spr.setAlpha(0.5);
+        this.spr.setAlpha(0);
+        this.randomTextEffect();
         this.spr.removeInteractive();
     }
 
@@ -158,8 +164,12 @@ export class Bauble extends Collidable{
         if(!this.clearedSpawn) {
             return;
         }
-        if(Math.hypot(c.y-this.y, c.x-this.x) < (this.rad+c.rad)){
-            this.reflect(c);
+        if(this.coll[0] > 0){
+            if(this.coll[1] == c.coll[1]){
+                if(Math.hypot(c.y-this.y, c.x-this.x) < (this.rad+c.rad)){
+                    this.reflect(c);
+                }
+            }
         }
     }
 
@@ -214,11 +224,10 @@ export class Bauble extends Collidable{
         if(this.clicked){
             //this.scene.sound.play(this.note,{volume: 0.5});
             this.scene.setVolume(1);
-            this.randomTextEffect();
         } else {
             //this.scene.sound.play(this.note,{volume: 0.5});
             //this.scene.sound.play("fail",{volume: 0.5});
-            this.scene.setVolume(0.75);
+            this.scene.setVolume(0.5);
             this.randomFailSound();
         }
         this.deleteFlag = true;

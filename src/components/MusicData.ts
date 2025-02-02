@@ -36,6 +36,11 @@ const Data = {
 		bpm: 206,
 		loop: false,
 	},
+	matojam: {
+		offset: 0,
+		bpm: 120,
+		loop: false,
+	},
 };
 
 export type MusicKey = keyof typeof Data;

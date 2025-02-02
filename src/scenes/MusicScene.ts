@@ -40,7 +40,7 @@ export class MusicScene extends BaseScene {
 		this.background = new Phaser.GameObjects.Image(this,0,0,"t_bkg");
 		this.background.setOrigin(0,0);
 		this.add.existing(this.background);
-		this.stageMusic = new Music(this,"m_test");
+		this.stageMusic = new Music(this,"matojam");
 		this.stageMusic.setVolume(1);
 		this.mtext = this.addText({
 			x: 960,

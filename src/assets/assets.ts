@@ -39,6 +39,7 @@ const audios: Audio[] = [
 	music("title", "m_main_menu"),
 	music("first", "m_first"),
 	music("m_test", "m_test"),
+	music("matojam", "matojam"),
 	sound("tree/rustle", "t_rustle", 0.5),
 	sound("t_Ab", "t_Ab", 0.5),
 	sound("t_B", "t_B", 0.5),

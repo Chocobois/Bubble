@@ -9,6 +9,7 @@ export class Collidable extends Button{
     public vy: number = 0;
     public rad: number = 110;
     public deleteFlag: boolean = false;
+    public coll: number[] = [0,1];
     constructor(scene:BaseScene, x: number, y:number) {
         super(scene,x,y);
     }
