@@ -4,6 +4,7 @@ import { Bauble } from "@/components/RhythmGame/Bauble";
 import { Collidable } from "@/components/RhythmGame/Collidable";
 import { Beatmap } from "@/components/RhythmGame/Beatmap";
 import { BasicEffect } from "@/components/RhythmGame/BasicEffect";
+import { Squeaker } from "@/components/RhythmGame/Squeaker";
 
 
 export class MusicScene extends BaseScene {
@@ -32,6 +33,11 @@ export class MusicScene extends BaseScene {
 	private aphAdj: number = 0;
 	private cfade: number = 0; //max 3000
 	private fadeOn: boolean = false;
+
+	private stBeat: number = 0;
+	private nextBeat: number = 0;
+	private mBeat: number = 161;
+	private squeaking: boolean = false;
 
 	public stageMusic: Music;
 	constructor() {
@@ -76,10 +82,28 @@ export class MusicScene extends BaseScene {
 		// this.fitToScreen(this.background);
 	}
 
+	makeSqueakGenerator(){
+		this.stBeat = Math.floor(this.stageMusic.getBarTime());
+		this.nextBeat = this.stBeat+2;
+		this.squeaking = true;
+	}
+
+	updateSqueaker(beat:number){
+		if(!this.squeaking){
+			return;
+		}
+		if(beat >= this.nextBeat) {
+			if(beat < this.mBeat){
+				this.addProp(new Squeaker(this, (100+Math.random()*1760), (80+Math.random()*920),"jsmol",[0,0],0));
+				this.nextBeat+=2;
+			}
+		}
+	}
+
 	update(time: number, delta: number) {
 		this.updateStartTimers(time, delta);
 		this.updateBkg(time,delta);
-
+		this.updateSqueaker(this.stageMusic.getBarTime());
 
 		this.script.update(time,delta,this.stageMusic.getBarTime());
 		this.updateBubbles(time,delta,this.stageMusic.getBarTime());

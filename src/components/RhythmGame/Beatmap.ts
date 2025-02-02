@@ -131,6 +131,8 @@ export class Beatmap {
         {key: "bubble", spawn: 42.5, spr: "bbl", ac:50, end:51, note:"t_F", v: [140, Phaser.Math.DegToRad(0)], xy:[1080,540], collide:[0,1]},
         {key: "bubble", spawn: 43.5, spr: "bbl", ac:52, end:53, note:"t_F", v: [140, Phaser.Math.DegToRad(180)], xy:[960,300], collide:[0,1]},
 
+        {key: "squeak", spawn: 45, spr: "bbl", ac:44, end:45, note:"t_F", v: [0, Phaser.Math.DegToRad(0)], xy:[960,540], collide:[0,1]},
+
         {key: "bubble", spawn: 50.5, spr: "bbl", ac:53.5, end:54.5, note:"t_F", v: [0, Phaser.Math.DegToRad(0)], xy:[960,540], collide:[0,1]},
         {key: "bubble", spawn: 51, spr: "bbl", ac:54, end:55, note:"t_F", v: [200, Phaser.Math.DegToRad(60)], xy:[960,540], collide:[0,1]},
         {key: "bubble", spawn: 52, spr: "bbl", ac:55, end:56, note:"t_F", v: [200, Phaser.Math.DegToRad(120)], xy:[960,540], collide:[0,1]},
@@ -367,6 +369,9 @@ export class Beatmap {
                 break;
             } case "fade": {
                 this.scene.crossFade();
+                break;
+            } case "squeak": {
+                this.scene.makeSqueakGenerator();
                 break;
             }   default: {
                 break;

@@ -11,6 +11,7 @@ const images: Image[] = [
 	image("characters/player", "player"),
 	image("characters/mandala_french", "mandala_french"),
 	image("characters/tower", "tower"),
+	image("characters/jsmol", "jsmol"),
 
 	// Items
 	image("items/coin", "coin"),
@@ -60,6 +61,8 @@ const audios: Audio[] = [
 	sound("fail5", "fail5", 0.35),
 	sound("fail6", "fail6", 0.35),
 
+
+	sound("squish2", "squish2", 0.35),
 	sound("charge_big", "charge_big", 0.5),
 ];
 
