@@ -321,6 +321,7 @@ export class Beatmap {
         {key: "bubble", spawn: 158, spr: "bbl", ac:162.75, end:163.75, note:"t_F", v: [0, Phaser.Math.DegToRad(-135)], xy:[1200,900], collide:[0,3]},
 
     ];
+    
     constructor(scene: MusicScene){
         this.curIndex = 0;
         this.scene=scene;

@@ -99,7 +99,7 @@ export class Bauble extends Collidable{
                 this.atimer = this.mtimer;
                 this.spr.setAlpha(1);
                 this.activated = true;
-                this.spr.setFrame(1);
+                this.spr.setFrame(2);
                 this.bindInteractive(this.spr);
             }
             if(this.atimer >= 0){
