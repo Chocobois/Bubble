@@ -205,13 +205,13 @@ export class Bauble extends Collidable{
     randomTextEffect(){
         switch(Math.trunc(Math.random()*3)){
             case 0: {
-                this.scene.addEffect(new TextEffect(this.scene,this.x,this.y,"GREAT!","green",40,true,"fuchsia",1000,100,1));
+                this.scene.addEffect(new TextEffect(this.scene,this.x,this.y,"GREAT!","green",80,true,"fuchsia",1000,100,1));
                 break;
             } case 1: {
-                this.scene.addEffect(new TextEffect(this.scene,this.x,this.y,"COOL!","cyan",40,true,"fuchsia",1000,100,1));
+                this.scene.addEffect(new TextEffect(this.scene,this.x,this.y,"COOL!","cyan",80,true,"fuchsia",1000,100,1));
                 break;
             } case 2: {
-                this.scene.addEffect(new TextEffect(this.scene,this.x,this.y,"YIFF!","yellow",40,true,"fuchsia",1000,100,1));
+                this.scene.addEffect(new TextEffect(this.scene,this.x,this.y,"YIFF!","yellow",80,true,"fuchsia",1000,100,1));
                 break;
             } default: {
                 break;
