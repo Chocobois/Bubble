@@ -10,6 +10,7 @@ import { Squeaker } from "@/components/RhythmGame/Squeaker";
 export class MusicScene extends BaseScene {
 	private background: Phaser.GameObjects.Image;
 	private background2: Phaser.GameObjects.Image;
+	private pointer: Phaser.GameObjects.Image;
 	private music: Music;
 
 	public curBeat: number;
@@ -98,9 +99,13 @@ export class MusicScene extends BaseScene {
 		this.layer2.setDepth(20);
 		this.layer3.setDepth(30);
 
-		// this.background = this.add.image(0, 0, "background");
-		// this.background.setOrigin(0);
-		// this.fitToScreen(this.background);
+		this.pointer = this.add.image(0, 0, "pointer");
+		this.pointer.setDepth(1000);
+		this.pointer.setScale(0.5);
+		this.pointer.setOrigin(82/256, 53/256);
+		this.input.on("pointermove", (pointer: Phaser.Input.Pointer) => {
+			this.pointer.setPosition(pointer.x, pointer.y);
+		});
 	}
 
 	makeSqueakGenerator(){

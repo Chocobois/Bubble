@@ -21,6 +21,7 @@ const images: Image[] = [
 	// UI
 	image("ui/hud", "hud"),
 	image("ui/UI_score", "UI_score"),
+	image("ui/pointer", "pointer"),
 
 	// Titlescreen
 	image("titlescreen/sky", "title_sky"),
