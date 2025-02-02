@@ -5,9 +5,9 @@ import { title, version } from "@/version.json";
 
 const creditsLeft = `${title} 
 
-@Handle
-@Handle
-@Handle`;
+Lumie
+Frassy
+Golen`;
 
 const creditsRight = `
 
@@ -64,7 +64,7 @@ export class TitleScene extends BaseScene {
 			y: 0.7 * this.H,
 			size: 160,
 			color: "#000",
-			text: "Game Title",
+			text: "									Bubble Bopper",
 		});
 		this.title.setOrigin(0.5);
 		this.title.setStroke("#FFF", 8);
