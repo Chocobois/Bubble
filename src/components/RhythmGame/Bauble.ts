@@ -47,7 +47,7 @@ export class Bauble extends Collidable{
         this.vx = this.v[0]*Math.cos(this.v[1]);
         this.vy = this.v[0]*Math.sin(this.v[1]);
 
-        this.disp.lineStyle(10, 0xFFFFFF, 1);
+        this.disp.lineStyle(6, 0xFFFFFF, 0);
         this.spr = this.scene.add.sprite(0,0,spr);
         this.atimer = -1;
         this.mtimer = (this.endBeat-this.activeBeat)*(60000/this.bpm);
@@ -59,7 +59,7 @@ export class Bauble extends Collidable{
         this.myText = this.scene.addText({
 			x: 0,
 			y: 0,
-			size: 60,
+			size: 90,
 			color: "white",
 			text: txt,
 		});
@@ -85,7 +85,7 @@ export class Bauble extends Collidable{
 
     redrawCircle(){
         this.disp.clear();
-        this.disp.lineStyle(10, 0xFFFFFF, 1-(this.atimer/this.mtimer));
+        this.disp.lineStyle(6, 0xFFFFFF, 1-(this.atimer/this.mtimer));
         this.disp.beginPath();
         this.disp.arc(0,0,(this.rd*(this.atimer/this.mtimer)),0,360,false,0.01);
         this.disp.closePath();
@@ -259,15 +259,19 @@ export class Bauble extends Collidable{
     }
 
     play(){
-        if(this.clicked){
+        if(this.clicked || this.scene.training){
             //this.scene.sound.play(this.note,{volume: 0.5});
+            if(!this.clicked){
+                this.randomTextEffect();
+            }
             this.scene.setVolume(1);
-            this.scene.sound.play("pop", {volume: 0.65});
+            this.scene.sound.play("pop", {volume: 1});
             this.scene.score += 100;
         } else {
             //this.scene.sound.play(this.note,{volume: 0.5});
             //this.scene.sound.play("fail",{volume: 0.5});
             this.scene.setVolume(0.95);
+            this.scene.sound.play("pop", {volume: 0.65});
             this.randomFailSound();
             this.randomFailText();
         }

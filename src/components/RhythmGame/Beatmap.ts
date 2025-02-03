@@ -323,8 +323,8 @@ export class Beatmap {
         {key: "bubble", spawn: 154.5, spr: "bbl", ac:158, end:160, note:"t_F", v: [100, Phaser.Math.DegToRad(90)], xy:[720,660], collide:[0,3], txt: "2"},
         {key: "bubble", spawn: 154.5, spr: "bbl", ac:158.25, end:160.25, note:"t_F", v: [110, Phaser.Math.DegToRad(90)], xy:[1200,660], collide:[0,3], txt: "3"},
 
-        {key: "bubble", spawn: 158, spr: "bbl", ac:161.25, end:163.25, note:"t_F", v: [0, Phaser.Math.DegToRad(-135)], xy:[720,900], collide:[0,3], txt: "1"},
-        {key: "bubble", spawn: 158, spr: "bbl", ac:161.75, end:163.75, note:"t_F", v: [0, Phaser.Math.DegToRad(-135)], xy:[1200,900], collide:[0,3], txt: "2"},
+        //{key: "bubble", spawn: 158, spr: "bbl", ac:161.25, end:163.25, note:"t_F", v: [0, Phaser.Math.DegToRad(-135)], xy:[720,900], collide:[0,3], txt: "1"},
+        //{key: "bubble", spawn: 158, spr: "bbl", ac:161.75, end:163.75, note:"t_F", v: [0, Phaser.Math.DegToRad(-135)], xy:[1200,900], collide:[0,3], txt: "2"},
 
     ];
 

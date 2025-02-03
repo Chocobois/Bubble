@@ -36,6 +36,7 @@ const spritesheets: SpriteSheet[] = [
 	spritesheet("bbl", "bbl", 256, 256),
 	spritesheet("meme_explosion", "meme_explosion", 200, 282),
 	spritesheet("squire", "squire", 270, 270),
+	spritesheet("ui/trainerbutton", "trainerbutton", 128, 128),
 ];
 
 /* Audios */

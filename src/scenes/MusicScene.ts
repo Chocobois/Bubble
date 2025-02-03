@@ -5,6 +5,7 @@ import { Collidable } from "@/components/RhythmGame/Collidable";
 import { Beatmap } from "@/components/RhythmGame/Beatmap";
 import { BasicEffect } from "@/components/RhythmGame/BasicEffect";
 import { Squeaker } from "@/components/RhythmGame/Squeaker";
+import { TrainerButton } from "@/components/RhythmGame/TrainerButton";
 
 
 export class MusicScene extends BaseScene {
@@ -12,6 +13,8 @@ export class MusicScene extends BaseScene {
 	private background2: Phaser.GameObjects.Image;
 	private pointer: Phaser.GameObjects.Image;
 	private music: Music;
+
+	public training: boolean = false;
 
 	public curBeat: number;
 	public blist: Bauble[];
@@ -34,6 +37,10 @@ export class MusicScene extends BaseScene {
 	private aphAdj: number = 0;
 	private cfade: number = 0; //max 3000
 	private fadeOn: boolean = false;
+
+	private lastBeat: number = 183;
+
+	public tsb: TrainerButton;
 
 	private stBeat: number = 0;
 	private nextBeat: number = 0;
@@ -85,6 +92,10 @@ export class MusicScene extends BaseScene {
 		this.add.existing(this.scoreUI);
 		this.scoreUI.setOrigin(0.125,0.5);
 		this.scoreUI.setDepth(11);
+
+		this.tsb = new TrainerButton(this, 1840, 60);
+		this.add.existing(this.tsb);
+		this.tsb.setDepth(12);
 
 		this.scoreText = this.addText({
 			x: 1340,
